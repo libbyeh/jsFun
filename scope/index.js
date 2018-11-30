@@ -29,11 +29,29 @@ const scope = {
 
     // Log D: personC
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Ben'},
+      { 'B': 'CardiB'},
+      { 'C': 'CardiB'},
+      { 'D': 'Paul'}
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // First we declare 3 global variables named personA, personB, and personC and assign to 'Paul', 'Ben', and 'Tom' respectiviely.
+    // We then declare a global function named changePerson but we skip down to line 27 because it hasn't been invoked yet.
+    // At line 28, we invoke our function changePerson and at line 8 we have an if statement that says when personA is strictly equal to 'Paul',
+    // person is assigned to the name 'CardiB'.
+    // We then invoke the nested function beautifyPerson and move to line 13 where beautifyPerson is declared. As the function has been invoked we
+    // At line 14 we log the value of personB which is 'Ben' at this time.
+    // At line 16 within the nested function beautifyPerson, we have an if statement that says if personB includes the letter 'B',
+    // personB will be reassigned to person which is 'CardiB' as scoped in the global function changePerson. Also a condition of the if statement is,
+    // personC will be reassigned to personB, which we just reassigned to 'CardiB' within the block if statement.
+    // At line 19, we log the value of personC, which is 'CardiB' at this time.
+    // We then move to line 23 which is code within the global function, changePerson and we assign personC to personA. 
+    // We then log the value of personB, which is 'CardiB' because we had reassigned it in the beautifyPerson function.
+    // Once we finish executing changePerson, we go back down to line 30 and log personC  which will give us Paul, which was 
+    // reassigned in the global function changePerson.
   },
 
   exerciseB() {
@@ -63,7 +81,12 @@ const scope = {
 
     // Log D: number
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 75},
+      { 'B': 64},
+      { 'C': 64},
+      { 'D': 30}
+    ];
     return result;
 
     // Annotation:
@@ -97,7 +120,12 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Yo'},
+      { 'B': 'Hey'},
+      { 'C': 'Hey'},
+      { 'D': 'Hello'}
+    ];
     return result;
 
     // Annotation:
@@ -131,7 +159,12 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'hi'},
+      { 'B': 'welcome'},
+      { 'C': 'welcome'},
+      { 'D': 'howdy'}
+    ];
     return result;
 
     // Annotation:
@@ -163,7 +196,12 @@ const scope = {
 
     // Log D: name
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'C': 'Brittany'},
+      { 'A': 'Nathaniel'},
+      { 'B': 'Nathaniel'},
+      { 'D': 'Brittany'}
+    ];
     return result;
 
     // Annotation:
@@ -198,7 +236,13 @@ const scope = {
 
     // Log E: dog
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Spot'},
+      { 'B': 'Spot'},
+      { 'C': 'Biscuit'},
+      { 'D': 'Biscuit'},
+      { 'E': 'Biscuit'}
+    ];
     return result;
 
     // Annotation:
@@ -228,7 +272,12 @@ const scope = {
 
     // Log D: fruit
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'reference error'},
+      { 'B': 'mango'},
+      { 'C': 'mango'},
+      { 'D': 'apple'}
+    ];
     return result;
 
     // Annotation:
@@ -241,7 +290,7 @@ const scope = {
     const fn1 = function() {
       let num = 4;
 
-      // Log A: num
+      // Log A: 4
 
       if (num < 5) {
         const num = 9;
@@ -250,25 +299,31 @@ const scope = {
 
         const newNum = num;
 
-        // Log B: newNum
+        // Log B: 9
       }
 
       newNum = num;
 
-      // Log C: newNum
+      // Log C: 4
     };
 
     const fn2 = function(num){
-      // Log D: num
+      // Log D: 4
 
       num = num + 1;
 
-      // Log E: num
+      // Log E: 5
     };
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 4},
+        { 'D': 9},
+        { 'E': 10},
+        { 'B': 9},
+        { 'C': 4}
+    ];
     return result;
 
     // Annotation:
@@ -299,7 +354,16 @@ const scope = {
     eatSnack();
     // Log E: hunger
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 75},
+        { 'B': 0},
+        { 'C': 75},
+        { 'D': 80},
+        { 'A': 55},
+        { 'B': 0},
+        { 'C': 55},
+        { 'E': 55},
+    ];
     return result;
 
     // Annotation:
@@ -340,7 +404,14 @@ const scope = {
     // Log E: sandwich
     // Log F: amandaBynes
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 'ketchup sandwich'},
+        { 'D': 'gouda'},
+        { 'B': undefined},
+        { 'C': 'not a mediocre sandwich'},
+        { 'E': 'not a mediocre sandwich'},
+        { 'F': 'National Treasure'}
+    ];
     return result;
 
     // Annotation:
@@ -361,7 +432,10 @@ const scope = {
 
     // Log B: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 7},
+        { 'B': 7}
+    ];
     return result;
 
     // Annotation:
@@ -393,7 +467,11 @@ const scope = {
 
     // Log C: grade
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 95},
+        { 'B': 90},
+        { 'C':  90}
+    ];
     return result;
 
     // Annotation:
@@ -419,7 +497,12 @@ const scope = {
 
     // Log D: num
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'A': 5},
+        { 'B': 6},
+        { 'C': 'reference error'},
+        { 'D': 6}
+    ];
     return result;
 
     // Annotation:
@@ -458,7 +541,14 @@ const scope = {
 
     // Log F: instructor
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'E': 'Pam'},
+        { 'A': 'Pam'},
+        { 'B': 'Pam'},
+        { 'C': 'Louisa'},
+        { 'D': 'Louisa'},
+        { 'F': 'Louisa'}
+    ];
     return result;
 
     // Annotation:
@@ -477,7 +567,11 @@ const scope = {
     putOnShoe();
     // Log C: shoe
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+        { 'B': 'flipflop'},
+        { 'A': undefined},
+        { 'C': 'flipflop'}
+    ];
     return result;
 
     // Annotation:

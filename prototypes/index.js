@@ -23,17 +23,25 @@ const kittyPrompts = {
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = kitties.filter(cat => {
+        return (cat.color === 'orange');
+    });
+    return result.map(cat => cat.name);
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given - an array
+    // Return an array that is a subset of the original array, therefore 
+    // I reach for filter.
+    // My final array will only have the names of the kitties that are orange, therefore 
+    // I will use map to return an array of the same length as the filtered array
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort((a, b) => {
+      return b.age - a.age;
+    });
     return result;
 
     // Annotation:
@@ -54,8 +62,62 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+   const result = kitties.map((kitty) => {
+      kitty.age += 2;
+      return kitty;
+      });
+      return result;
+
+     // Annotation:
+     // Write your annotation here as a comment
+    }
+  };
+
+
+
+
+
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+
+
+
+
+
+
+
+// DATASET: pie from ./datasets/pie
+const piePrompts = {
+  howManyIngredients() {
+    // The bakery needs to make more rhubarb pies in order to meet the
+    // desiredInventoryCount. Programmatically determine how many more pies
+    // need to be made, and return an object of the total number of ingredients we need
+    // we need to buy in order to make the remaining pies. e.g.:
+    // {
+    //   cinnamon: 50,
+    //   sugar: 100
+    // }
+
+    const neededPies = pie.desiredInventoryCount - pie.inventoryCount;
+    const neededCinnamons = pie.ingredients.cinnamon * neededPies;
+    const neededSugars = pie.ingredients.sugar * neededPies;
+
+    const result = {
+        cinnamon: neededCinnamons, 
+        sugar: neededSugars
+    };
+
+
+
+
     return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
   }
 };
 
@@ -75,6 +137,7 @@ const kittyPrompts = {
 
 
 
+
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   membersBelongingToClubs() {
@@ -86,11 +149,22 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+        club.members.forEach((member) => {
+            if (!acc[member]) {
+                acc[member] = [club.club];
+            } else {
+                acc[member].push(club.club);
+            }
+        })
+        return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given: an array of objects
+    // Return: an object, therefore I will reach for reduce.
+    // 
   }
 };
 
@@ -122,11 +196,20 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map((mod) => {
+        let studentsPerInstructor = mod.students / mod.instructors
+        return {
+            mod: mod.mod,
+            studentsPerInstructor: studentsPerInstructor
+        }
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given: an array of objects
+    // Return: an array of the same length, therefore we would reach for map
+    // I want an object with the mod number and studentsPerInstructor which
+    // will be mod.students / mod.instructor
   }
 };
 
@@ -157,7 +240,12 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map((cake) => {
+        return {
+            flavor: cake.cakeFlavor,
+            inStock: cake.inStock
+        }
+    });
     return result;
 
     // Annotation:
@@ -185,7 +273,9 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter((cake) => {
+        return cake.inStock;
+    });
     return result;
 
     // Annotation:
@@ -196,7 +286,10 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+        acc += cake.inStock;
+        return acc;
+    }, 0);
     return result;
 
     // Annotation:
@@ -208,7 +301,14 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+        cake.toppings.forEach((topping) => {
+            if (acc.indexOf(topping) === -1) {
+                acc.push(topping)
+            }
+        })         
+        return acc;
+    }, []);
     return result;
 
     // Annotation:
@@ -216,7 +316,7 @@ const cakePrompts = {
   },
 
   groceryList() {
-    // I need to make a grocery list. Please give me an object where the keys are
+    // Please give me an object where the keys are
     // each topping, and the values are the amount of that topping I need to buy e.g.
     // { 
     //    'dutch process cocoa': 1,
@@ -226,11 +326,22 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach((topping) => {
+        if (!acc[topping]) {
+          acc[topping] = 1;
+        } else {
+          acc[topping]++;
+        }
+      })
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given: an array of objects
+    // Return: an object with key that is a string and value is a number
+    // I need to access the toppings property in the cakes array.
   }
 };
 
@@ -261,7 +372,9 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter((classroom) => {
+      return classroom.program === 'FE';
+    });
     return result;
 
     // Annotation:
@@ -276,7 +389,14 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((obj, classroom) => {
+      if (classroom.program === 'FE') {
+        obj.feCapacity += classroom.capacity;
+      } else {
+        obj.beCapacity += classroom.capacity;
+      }
+   return obj;
+    }, { feCapacity: 0, beCapacity: 0 });
     return result;
 
     // Annotation:
@@ -286,7 +406,9 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => {
+      return a.capacity - b.capacity;
+    });
     return result;
 
     // Annotation:
@@ -316,7 +438,10 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+        acc += brewery.beers.length;
+        return acc;
+    }, 0);
     return result;
 
     // Annotation:
@@ -332,7 +457,9 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.map((brewery) => {
+      return { name: brewery.name, beerCount: brewery.beers.length }
+    });
     return result;
 
     // Annotation:
@@ -344,8 +471,12 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = breweries.reduce((obj, brewery) => {
+      return obj.concat(brewery.beers);
+    }, []).sort((a, b) => {
+      return b.abv - a.abv;
+    });
+    return result[0];
 
     // Annotation:
     // Write your annotation here as a comment
@@ -392,11 +523,29 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // map over the instructors array
+    // find the matching cohort for current instructor
+    // grab the studentCount value from the matching cohort
+    // return the object with the current instructors name and the studentCount
+
+
+    const result = instructors.map((instructor) => {
+        let matchingCohort = cohorts.find((cohort) => {
+            return cohort.module === instructor.module;
+        });
+        let numberOfStudents = matchingCohort.studentCount;
+        return { name: instructor.name, studentCount: numberOfStudents};
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given: 2 arrays
+    // Return: an array
+    // Method: reach for map initially because it returns the same length
+    // Start iterating over which dataset: because instructors has all the instructor
+    // names already.
+    // Datasets have in common(how to link): module 
+    // 
   },
 
   studentsPerInstructor() {
@@ -406,11 +555,17 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((obj, cohort) => {
+      let teachersPerModule = instructors.filter(instructor => {
+        return instructor.module === cohort.module
+      })
+      obj[`cohort${cohort.cohort}`] = cohort.studentCount / teachersPerModule.length;
+      return obj
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Write your annotation here as a comment  },
   },
 
   modulesPerTeacher() {
@@ -423,7 +578,21 @@ const turingPrompts = {
     //   Pam: [2, 4]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // key will be the instructors name, so we can use the instructors dataset
+    // we need to see if the what the instructor teaches matches the cohort curriculum
+    // if so, then add the cohort module to the array for the instructor
+
+    const result = instructors.reduce((obj, instructor) => {
+      obj[instructor.name] = [];
+      instructor.teaches.forEach((teach) => {
+        cohorts.forEach((cohort) => {
+          if (cohort.curriculum.includes(teach) && (!obj[instructor.name].includes(cohort.module)))  { 
+            obj[instructor.name].push(cohort.module);
+          }
+        }) 
+      })
+      return obj;
+    }, {});
     return result;
 
     // Annotation:
@@ -440,7 +609,17 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((obj, cohort) => {
+      cohort.curriculum.forEach((topic) => {
+        obj[topic] = [];
+        instructors.forEach((instructor) => {
+          if (instructor.teaches.includes(topic)) {
+            obj[topic].push(instructor.name);
+          }
+        });
+      });
+      return obj;
+    }, {});
     return result;
 
     // Annotation:
